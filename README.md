@@ -131,7 +131,7 @@ Initialization: If you have already set the environment variables using the expo
 
     For the wind operation, you can refer to `wind.py`
 
-    To complete the Wind process, you can execute the following command to ring:
+    To complete the Wind process, you can execute the following command to wind:
     ```bash
     python wind.py
     ```
