@@ -7,6 +7,7 @@ The following steps will be conducted on TON's testnet!
     
     ```bash
     git clone https://github.com/Ton-Dynasty/ticton-playground.git
+    cd ticton-playground
     pip install ticton
     ```
     
@@ -38,7 +39,7 @@ The following steps will be conducted on TON's testnet!
     ```
     
 4. Initialization
-If you have already set the environment variables by using the `export` command, you can easily initialize the ticton client using the following code:
+Initialization: If you have already set the environment variables using the export command, you can easily initialize the ticton client using the following code. You can see examples in `tick.py` or `ring.py`:
     
     ```python
     from ticton import TicTonAsyncClient
@@ -59,7 +60,7 @@ If you have already set the environment variables by using the `export` command,
         toncenter_api_key="your_api_key",
         threshold_price=0.7
     )
-    
+
     ```
     
 1. **Checking the Current TON/USDT Price**
@@ -117,3 +118,6 @@ If you have already set the environment variables by using the `export` command,
     <img src="images/tic.jpg">
     <img src="images/bal.jpg">
     
+5. **Wind (Advanced, this quote test can be completed without use Wind to receive an NFT)**
+   
+    Instructions on how to become a Timekeeper to Wind (arbitrage) incorrect quotes will be provided in the future.
