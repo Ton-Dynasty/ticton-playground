@@ -18,8 +18,8 @@ The following steps will be conducted on TON's testnet!
     - If your TON balance is low, you can obtain additional TON from the [@testgiver_ton_bot](https://t.me/testgiver_ton_bot) on Telegram.
     - You can visit [tonviewer-USDT](https://testnet.tonviewer.com/EQBqSpvo4S87mX9tjHaG4zhYZeORhVhMapBJpnMZ64jhrEQK) , scan the QR code, and use "Mint:1" as a comment to receive 1000 our mock USDT tokens for your testnet operations.(Simply pay 0.1 ton as a transaction fee when submitting "Mint:1" as a comment.)
   
-        <img src="images/usdt.png" height="231">
-        <img src="images/mint.png" width="149">
+        <img src="images/usdt.png" height="300">
+        <img src="images/mint.png" width="190">
 3. (Optional) Setting the Environment Variables
     
     We requires several environment variables for its operation.You can set the environment variables using the `export` command in your shell. Here are the variables you need to set:
