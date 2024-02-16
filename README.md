@@ -14,7 +14,9 @@ You have the capability to execute the following procedures on the TON blockchai
     Next, we will simulate the quotation process for the TON/USDT token pair on the testnet. Ensure you have sufficient funds for the operation. 
     
     - If your TON balance is low, you can obtain additional TON from the [@testgiver_ton_bot](https://t.me/testgiver_ton_bot) on Telegram.
-    - You can visit [tonviewer-USDT](https://testnet.tonviewer.com/EQBqSpvo4S87mX9tjHaG4zhYZeORhVhMapBJpnMZ64jhrEQK) , scan the QR code, and use "Mint:1" as a comment to receive 1000 our mock USDT tokens for your testnet operations.
+    - You can visit [tonviewer-USDT](https://testnet.tonviewer.com/EQBqSpvo4S87mX9tjHaG4zhYZeORhVhMapBJpnMZ64jhrEQK) , scan the QR code, and use "Mint:1" as a comment to receive 1000 our mock USDT tokens for your testnet operations.(Simply pay 0.1 ton as a transaction fee when submitting "Mint:1" as a comment.)
+        <img src="images/usdt.png" height="231">
+        <img src="images/mint.png" width="149">
 3. (Optional) Setting the Environment Variables
     
     We requires several environment variables for its operation.You can set the environment variables using the `export` command in your shell. Here are the variables you need to set:
@@ -28,7 +30,7 @@ You have the capability to execute the following procedures on the TON blockchai
     ```bash
     export TICTON_WALLET_MNEMONICS="word1 word2 word3 ... wordN"
     export TICTON_WALLET_VERSION="v4r2"
-    export TICTON_ORACLE_ADDRESS="your_oracle_address"
+    export TICTON_ORACLE_ADDRESS="EQBENmfrJP6KwfBBtcHaixDHYCnBcD3QGBJ6NJtY3dwXI0go"
     export TICTON_TONCENTER_API_KEY="your_api_key"
     export TICTON_THRESHOLD_PRICE=0.7
     ```
@@ -49,20 +51,20 @@ If you have already set the environment variables by using the `export` command,
     from ticton import TicTonAsyncClient
     
     client = await TicTonAsyncClient.init(
-        wallet_mnemonics="word1 word2 word3 ... wordN",
+        mnemonics="word1 word2 word3 ... wordN",
         wallet_version="v4r2",
-        oracle_address="your_oracle_address",
+        oracle_addr="EQBENmfrJP6KwfBBtcHaixDHYCnBcD3QGBJ6NJtY3dwXI0go",
         toncenter_api_key="your_api_key",
         threshold_price=0.7
     )
     
     ```
     
-5. **Checking the Current TON/USDT Price**
+1. **Checking the Current TON/USDT Price**
     
     To find the current market price of TON/USDT, you can visit the official website ([https://ton.tg](https://ton.tg/)) or consult other exchanges. This will provide you with the latest pricing information necessary for informed trading or minting decisions on the testnet.
     
-6. **Tick**
+2. **Tick**
     
     If you believe the current market price of TON/USDT to be 2.2, you can execute a tick with the following Python code:
     
@@ -73,9 +75,9 @@ If you have already set the environment variables by using the `export` command,
     Tick Success, tick price: 2.2, spend base asset: 1.23, spend quote asset: 2.2
     ```
     
-    Receiving a success message indicates a successful operation. Wait a few seconds, then you can search your wallet address on [tonviewer](https://testnet.tonviewer.com/) or [tonscan](https://testnet.tonscan.org/) to check the transaction.
+    Receiving a success message indicates a successful operation. Wait a few seconds, then you can search your wallet address on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
     
-7. **Getting Alarm Metadata**
+3. **Getting Alarm Metadata**
     
     After completing the tick operation, an alarm contract will be deployed by the oracle. This contract allows you to view the alarm's metadata. The following steps use tonviewer for demonstration:
     
@@ -90,7 +92,7 @@ If you have already set the environment variables by using the `export` command,
         ![image](https://github.com/Ton-Dynasty/ticton-playground/assets/36180214/32cfc116-700c-4529-ad3c-cdd73c221807)
 
         
-8. **Ring**
+4. **Ring**
     
     After waiting for more than one minute, you can use the Ring to reclaim your alarm. During this minute, continuously monitor market price changes. If there's a difference from your tick, ring immediately to avoid arbitrage by others. If your tick has been acknowledged by the oracle, you will be rewarded with TIC tokens.
     
@@ -105,6 +107,13 @@ If you have already set the environment variables by using the `export` command,
     Ring Success, alarm id: 1
     ```
     
-    Receiving a success message indicates a successful operation. Wait a few seconds, then you can search your wallet address on [tonviewer](https://testnet.tonviewer.com/) or [tonscan](https://testnet.tonscan.org/) to check the transaction.
+    Receiving a success message indicates a successful operation. Wait a few seconds, then you can search your wallet address on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
     
-    Subsequently, you can check the jetton wallet of TIC token to see if you have received TIC tokens as a reward.
+    
+    Subsequently, you can check the jetton wallet of the TIC token to confirm whether you have received TIC tokens as a reward. 
+    
+    The address of your TIC wallet is the point F in the diagram below. You can go to this address, click on Methods, and enter get_wallet_data to view the TIC Balance.
+
+    <img src="images/tic.jpg">
+    <img src="images/bal.jpg">
+    
