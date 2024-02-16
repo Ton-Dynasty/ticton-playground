@@ -8,7 +8,7 @@ The following steps will be conducted on TON's testnet!
 
 1. **How to Install**
     
-    First, ensure your Python environment meets the version requirements: Python version >= 3.10 and < 3.12. The first step is to git clone this repo, then to install the ticton package, please execute the following command in your terminal:
+    First, ensure your Python environment meets the version requirements: `Python version >= 3.10 and < 3.12`. The first step is to git clone this repo, then to install the ticton package, please execute the following command in your terminal:
     
     ```bash
     git clone https://github.com/Ton-Dynasty/ticton-playground.git
@@ -123,6 +123,13 @@ Initialization: If you have already set the environment variables using the expo
     <img src="images/tic.jpg">
     <img src="images/bal.jpg">
     
-5. **Wind (Advanced, this quote test can be completed without use Wind to receive an NFT)**
+5. **Wind (Advanced, this quote test event can be completed without Wind to receive an NFT)**
    
-    Instructions on how to become a Timekeeper to Wind (arbitrage) incorrect quotes will be provided in the future.
+    If you find that the quote of an Alarm (which can be seen through the get method: `getAlarmMetadata()` and its `baseAssetPrice`) is no longer accurate, then you can arbitrage this Alarm. For detailed arbitrage mechanisms, refer to this [video](https://www.youtube.com/watch?v=_EwAkiGiw-U) or the [TICTON documentation](https://ton-dynasty.github.io/ticton-doc/).
+
+    In simple terms, if you discover Alarm 0 quoting TON at 1 ton = 20u, but you believe 1 ton = 25u, then you can directly spend 20u to buy 1 ton from Alarm 0. For you, this means earning a difference of 5u. Besides arbitraging, you also need to provide a correct quote and offer twice the base asset compared to Alarm 0. Therefore, you need to pay 2 tons and 50u (1 ton = 25u).
+
+    For the wind operation, you can refer to `wind.py`:
+    ```bash
+    python wind.py
+    ```
