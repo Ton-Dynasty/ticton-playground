@@ -13,7 +13,7 @@ async def main():
 
     # Step1: Tick (Quoting the TON/USDT Price)
     # Checking the Current TON/USDT Price and fill the price in the tick method
-    price = 2.5
+    price = 2.5  # Replace with the TON/USDT price you think is accurate for the next 1 minutes
     await client.tick(price)
 
     # Go to check ring.py for the next steps.

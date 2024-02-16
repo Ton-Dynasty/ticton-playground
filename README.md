@@ -1,5 +1,5 @@
 # ticton-playground
-You have the capability to execute the following procedures on the TON blockchain's testnet:
+The following steps will be conducted on TON's testnet!
 
 1. **How to Install**
     
@@ -16,6 +16,7 @@ You have the capability to execute the following procedures on the TON blockchai
     
     - If your TON balance is low, you can obtain additional TON from the [@testgiver_ton_bot](https://t.me/testgiver_ton_bot) on Telegram.
     - You can visit [tonviewer-USDT](https://testnet.tonviewer.com/EQBqSpvo4S87mX9tjHaG4zhYZeORhVhMapBJpnMZ64jhrEQK) , scan the QR code, and use "Mint:1" as a comment to receive 1000 our mock USDT tokens for your testnet operations.(Simply pay 0.1 ton as a transaction fee when submitting "Mint:1" as a comment.)
+  
         <img src="images/usdt.png" height="231">
         <img src="images/mint.png" width="149">
 3. (Optional) Setting the Environment Variables
@@ -67,7 +68,7 @@ If you have already set the environment variables by using the `export` command,
     
 2. **Tick**
     
-    If you believe the current market price of TON/USDT to be 2.2, you can execute the following command to tick:
+    If you believe the current market price of TON/USDT to be 2.2, you can enter the price in `tick.py` and execute the following command to place a quote:
     ```bash
     python tick.py
     # Success message
