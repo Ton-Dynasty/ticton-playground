@@ -129,7 +129,9 @@ Initialization: If you have already set the environment variables using the expo
 
     In simple terms, if you discover Alarm 0 quoting TON at 1 ton = 20u, but you believe 1 ton = 25u, then you can directly spend 20u to buy 1 ton from Alarm 0. For you, this means earning a difference of 5u. Besides arbitraging, you also need to provide a correct quote and offer twice the base asset compared to Alarm 0. Therefore, you need to pay 2 tons and 50u (1 ton = 25u).
 
-    For the wind operation, you can refer to `wind.py`:
+    For the wind operation, you can refer to `wind.py`
+
+    To complete the Wind process, you can execute the following command to ring:
     ```bash
     python wind.py
     ```
