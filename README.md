@@ -1,4 +1,9 @@
 # ticton-playground
+This repo is primarily for the **TICTON quote testing event tutorial**. Everyone can refer to this doc to complete the quote and claim rewards. 
+Those who successfully follow the tutorial can obtain a TICTON-exclusive NFT. In the future, holders of these NFTs will have priority in participating in airdrops and other events.
+
+If you have any questions, feel free to join our [community](https://t.me/TictonOfficial) and discuss with us.
+
 The following steps will be conducted on TON's testnet!
 
 1. **How to Install**
