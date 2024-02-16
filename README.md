@@ -1,11 +1,12 @@
 # ticton-playground
 You have the capability to execute the following procedures on the TON blockchain's testnet:
 
-1. **Installing the `ticton` Package**
+1. **How to Install**
     
-    To begin, ensure your Python environment meets the version requirements: Python >= 3.10 and < 3.12. To install the **`ticton`** package, execute the following command in your terminal:
+    First, ensure your Python environment meets the version requirements: Python version >= 3.10 and < 3.12. The first step is to git clone this repo, then to install the ticton package, please execute the following command in your terminal:
     
     ```bash
+    git clone https://github.com/Ton-Dynasty/ticton-playground.git
     pip install ticton
     ```
     
@@ -66,13 +67,11 @@ If you have already set the environment variables by using the `export` command,
     
 2. **Tick**
     
-    If you believe the current market price of TON/USDT to be 2.2, you can execute a tick with the following Python code:
-    
-    ```python
-    result = await client.tick(2.2)
-    
-    # success message
-    Tick Success, tick price: 2.2, spend base asset: 1.23, spend quote asset: 2.2
+    If you believe the current market price of TON/USDT to be 2.2, you can execute the following command to tick:
+    ```bash
+    python tick.py
+    # Success message
+    Tick Success, quote price: 2.2, spend base asset: 1.23, spend quote asset: 2.2
     ```
     
     Receiving a success message indicates a successful operation. Wait a few seconds, then you can search your wallet address on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
@@ -94,15 +93,15 @@ If you have already set the environment variables by using the `export` command,
         
 4. **Ring**
     
-    After waiting for more than one minute, you can use the Ring to reclaim your alarm. During this minute, continuously monitor market price changes. If there's a difference from your tick, ring immediately to avoid arbitrage by others. If your tick has been acknowledged by the oracle, you will be rewarded with TIC tokens.
+        
+    After calling Tick, you can observe the price of TON. When you believe your quote has deviated from the current price of TON, you can call Ring to close this position to avoid being arbitraged by Timekeeper. 
     
-    To complete the Ring process, you would typically execute a script similar to the following:
+    When calling Ring, if the quote has existed for at least one minute and hasn't been arbitraged by Timekeeper, a reward can be claimed; otherwise, no reward is available.
     
-    ```python
-    alarm_id = 1
+    To complete the Ring process, you can execute the following command to ring:
     
-    result = await client.ring(alarm_id)
-    
+    ```bash
+    python ring.py
     # success message
     Ring Success, alarm id: 1
     ```
