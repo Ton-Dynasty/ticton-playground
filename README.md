@@ -113,7 +113,7 @@ Initialization: If you have already set the environment variables using the expo
     
     Subsequently, you can check the jetton wallet of the TIC token to confirm whether you have received TIC tokens as a reward. 
     
-    The address of your TIC wallet is the point F in the diagram below. You can go to this address, click on Methods, and enter get_wallet_data to view the TIC Balance.
+    The address of your TIC wallet is the point **`F`** in the diagram below. You can go to this address, click on Methods, and enter get_wallet_data to view the TIC Balance.
 
     <img src="images/tic.jpg">
     <img src="images/bal.jpg">
