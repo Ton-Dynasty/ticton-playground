@@ -1,9 +1,13 @@
 from ticton import TicTonAsyncClient
+from tonsdk.crypto import mnemonic_new
+from tonsdk.contract.wallet import Wallets, WalletVersionEnum
+
 import asyncio
 import logging
 from dotenv import load_dotenv
 import sys
 import os
+from helper import wait_tick_success
 
 load_dotenv()
 mnemonics = os.getenv("WALLET_MNEMONICS")
@@ -12,8 +16,13 @@ LOGGER = logging.getLogger(__name__)
 
 
 async def tick(client: TicTonAsyncClient, price: float):
-    txhash = await client.tick(price)
-    print(txhash)
+    sent_msg = await client.tick(price)
+    print(sent_msg)
+    await wait_tick_success(
+        client=client.toncenter,
+        msg_hash=sent_msg.message_hash,
+        user_address=client.wallet.address.to_string(True, True, True),
+    )
 
 
 async def ring(client: TicTonAsyncClient, alarm_id: int):
@@ -71,9 +80,6 @@ async def main():
         price = float(input(f"Enter the price (alarm price: {old_price}): "))
         await wind(client, alarm_id, buy_num, price)
     elif choice == 4:
-        from tonsdk.crypto import mnemonic_new
-        from tonsdk.contract.wallet import Wallets, WalletVersionEnum
-
         wallet_mnemonic = mnemonic_new()
         version = WalletVersionEnum.v4r2
         _, _, _, wallet = Wallets.from_mnemonics(wallet_mnemonic, version)
