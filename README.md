@@ -13,8 +13,12 @@ The following steps will be conducted on TON's testnet!
     ```bash
     git clone https://github.com/Ton-Dynasty/ticton-playground.git
     cd ticton-playground
-    pip install ticton
+    pip install -r requirements.txt
+    cp .env.example .env
     ```
+    **Please ensure that you have filled out the `.env` file before proceeding with the following steps.**
+    
+    TONCENTER_API_KEY can apply at [@tonapibot](https://t.me/tonapibot).
     
 2. **Mining Testnet USDT**
     
@@ -25,65 +29,22 @@ The following steps will be conducted on TON's testnet!
   
         <img src="images/usdt.png" height="300">
         <img src="images/mint.png" width="190">
-3. (Optional) Setting the Environment Variables
     
-    We requires several environment variables for its operation.You can set the environment variables using the `export` command in your shell. Here are the variables you need to set:
-    
-    - `TICTON_WALLET_MNEMONICS`: A space-separated list of mnemonics used for wallet authentication and operations.
-    - `TICTON_WALLET_VERSION`: Specifies the wallet version. Supported values are "v2r1", "v2r2", "v3r1", "v3r2", "v4r1", "v4r2", "hv2". The default is "v4r2".
-    - `TICTON_ORACLE_ADDRESS`: The address of the oracle smart contract on the TON blockchain.
-    - `TICTON_TONCENTER_API_KEY`: An API key for accessing TON blockchain data. You can apply for an API key at [@tonapibot](https://t.me/tonapibot).
-    - `TICTON_THRESHOLD_PRICE`: A float value that sets a threshold price, with a default of 0.7.
-    
-    ```bash
-    export TICTON_WALLET_MNEMONICS="word1 word2 word3 ... wordN"
-    export TICTON_WALLET_VERSION="v4r2"
-    export TICTON_ORACLE_ADDRESS="EQBENmfrJP6KwfBBtcHaixDHYCnBcD3QGBJ6NJtY3dwXI0go"
-    export TICTON_TONCENTER_API_KEY="your_api_key"
-    export TICTON_THRESHOLD_PRICE=0.7
-    ```
-    
-4. Initialization
-Initialization: If you have already set the environment variables using the export command, you can easily initialize the ticton client using the following code. You can see examples in `tick.py` or `ring.py`:
-    
-    ```python
-    from ticton import TicTonAsyncClient
-    
-    client = await TicTonAsyncClient.init()
-    
-    ```
-    
-    Alternatively, if you prefer not to set global environment variables, you can pass these directly to the initialization function:
-    
-    ```python
-    from ticton import TicTonAsyncClient
-    
-    client = await TicTonAsyncClient.init(
-        mnemonics="word1 word2 word3 ... wordN",
-        wallet_version="v4r2",
-        oracle_addr="EQBENmfrJP6KwfBBtcHaixDHYCnBcD3QGBJ6NJtY3dwXI0go",
-        toncenter_api_key="your_api_key",
-        threshold_price=0.7
-    )
-
-    ```
-    
-1. **Checking the Current TON/USDT Price**
+3. **Checking the Current TON/USDT Price**
     
     To find the current market price of TON/USDT, you can visit the official website ([https://ton.tg](https://ton.tg/)) or consult other exchanges. This will provide you with the latest pricing information necessary for informed trading or minting decisions on the testnet.
     
-2. **Tick**
+4. **Tick**
     
-    If you believe the current market price of TON/USDT to be 2.2, you can enter the price in `tick.py` and execute the following command to place a quote:
+    If you believe the current market price of TON/USDT to be 2.2, you can execute the following command to tick:
     ```bash
-    python tick.py
-    # Success message
-    Tick Success, quote price: 2.2, spend base asset: 1.23, spend quote asset: 2.2
+    python main.py
     ```
+    The image below depicts the process of quoting a price of 1 TON for 2.2 USDT.
     
-    Receiving a success message indicates a successful operation. Wait a few seconds, then you can search your wallet address on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
+    Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
     
-3. **Getting Alarm Metadata**
+5. **Getting Alarm Metadata**
     
     After completing the tick operation, an alarm contract will be deployed by the oracle. This contract allows you to view the alarm's metadata. The following steps use tonviewer for demonstration:
     
@@ -98,7 +59,7 @@ Initialization: If you have already set the environment variables using the expo
         ![image](https://github.com/Ton-Dynasty/ticton-playground/assets/36180214/32cfc116-700c-4529-ad3c-cdd73c221807)
 
         
-4. **Ring**
+6. **Ring**
     
         
     After calling Tick, you can observe the price of TON. When you believe your quote has deviated from the current price of TON, you can call Ring to close this position to avoid being arbitraged by Timekeeper. 
@@ -108,12 +69,11 @@ Initialization: If you have already set the environment variables using the expo
     To complete the Ring process, you can execute the following command to ring:
     
     ```bash
-    python ring.py
-    # success message
-    Ring Success, alarm id: 1
+    python main.py
     ```
+    The image below depicts the process of ringing your alarm index you got in the step5.
     
-    Receiving a success message indicates a successful operation. Wait a few seconds, then you can search your wallet address on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
+    Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
     
     
     Subsequently, you can check the jetton wallet of the TIC token to confirm whether you have received TIC tokens as a reward. 
@@ -123,7 +83,7 @@ Initialization: If you have already set the environment variables using the expo
     <img src="images/tic.jpg">
     <img src="images/bal.jpg">
     
-5. **Wind (Advanced, this quote test event can be completed without Wind to receive an NFT)**
+7. **Wind (Advanced, this quote test event can be completed without Wind to receive an NFT)**
    
     If you find that the quote of an Alarm (which can be seen through the get method: `getAlarmMetadata()` and its `baseAssetPrice`) is no longer accurate, then you can arbitrage this Alarm. For detailed arbitrage mechanisms, refer to this [video](https://www.youtube.com/watch?v=_EwAkiGiw-U) or the [TICTON documentation](https://ton-dynasty.github.io/ticton-doc/).
 
@@ -133,5 +93,6 @@ Initialization: If you have already set the environment variables using the expo
 
     To complete the Wind process, you can execute the following command to wind:
     ```bash
-    python wind.py
+    python main.py
     ```
+    The image below depicts the process of arbitraging a alarm where you believe the quoted price is incorrect. 
