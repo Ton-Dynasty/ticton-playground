@@ -1,9 +1,13 @@
 from ticton import TicTonAsyncClient
+from tonsdk.crypto import mnemonic_new
+from tonsdk.contract.wallet import Wallets, WalletVersionEnum
+
 import asyncio
 import logging
 from dotenv import load_dotenv
 import sys
 import os
+from helper import wait_tick_success
 
 load_dotenv()
 mnemonics = os.getenv("WALLET_MNEMONICS")
@@ -12,8 +16,13 @@ LOGGER = logging.getLogger(__name__)
 
 
 async def tick(client: TicTonAsyncClient, price: float):
-    txhash = await client.tick(price)
-    print(txhash)
+    sent_msg = await client.tick(price)
+    print(sent_msg)
+    await wait_tick_success(
+        client=client.toncenter,
+        msg_hash=sent_msg.message_hash,
+        user_address=client.wallet.address.to_string(True, True, True),
+    )
 
 
 async def ring(client: TicTonAsyncClient, alarm_id: int):
@@ -31,7 +40,8 @@ async def main():
     print("1. tick")
     print("2. ring")
     print("3. wind")
-    choice = int(input("Enter your choice (1/2/3): "))
+    print("4. generate new wallet")
+    choice = int(input("Enter your choice (1/2/3/4): "))
 
     client = await TicTonAsyncClient.init(
         mnemonics=mnemonics,
@@ -59,9 +69,7 @@ async def main():
             return
         alarm_metadata = await client.get_alarm_metadata(alarm_addr)
         remain_scale = alarm_metadata.remain_scale
-        decimal_ratio = 10 ** (
-            client.metadata.base_asset_decimals - client.metadata.quote_asset_decimals
-        )
+        decimal_ratio = 10 ** (client.metadata.base_asset_decimals - client.metadata.quote_asset_decimals)
         old_price = alarm_metadata.base_asset_price * decimal_ratio / 2**64
         sys.stdout.write("\033[F")
         if remain_scale == 0:
@@ -71,6 +79,20 @@ async def main():
         buy_num = int(input(f"Enter the buy num ({rng}): "))
         price = float(input(f"Enter the price (alarm price: {old_price}): "))
         await wind(client, alarm_id, buy_num, price)
+    elif choice == 4:
+        wallet_mnemonic = mnemonic_new()
+        version = WalletVersionEnum.v4r2
+        _, _, _, wallet = Wallets.from_mnemonics(wallet_mnemonic, version)
+        print("\033[95m===============Wallet Information===============\033[0m")
+        print("Wallet Mnemonics: \n", "\033[93m" + " ".join(wallet_mnemonic) + "\033[0m")
+        print("Wallet Address: \n", "\033[93m" + wallet.address.to_string(True, True, True) + "\033[0m")
+        print("\033[95m===============Instructions===============\033[92m")
+        print("⭐️ Please keep the wallet mnemonics in a safe place ⭐️")
+        print("1. Import the mnemonics to your wallet software. (e.g. Browser Extension, TonKeeper, TonSpace, etc.)")
+        print("2. Copy your address and go to https://t.me/testgiver_ton_bot to get some testnet TON.")
+        print("3. Use the wallet address to receive TON from TestGiver.")
+        print("4. Remenber to edit `.env` with your new mnemonic\033[0m")
+        print("🥳🥳🥳 Done 🥳🥳🥳")
     else:
         print("Invalid choice")
 
