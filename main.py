@@ -91,7 +91,7 @@ async def main():
         print("1. Import the mnemonics to your wallet software. (e.g. Browser Extension, TonKeeper, TonSpace, etc.)")
         print("2. Copy your address and go to https://t.me/testgiver_ton_bot to get some testnet TON.")
         print("3. Use the wallet address to receive TON from TestGiver.")
-        print("4. Remenber to edit `.env` with your new mnemonic\033[0m")
+        print("4. Remember to edit `.env` with your new mnemonic\033[0m")
         print("🥳🥳🥳 Done 🥳🥳🥳")
     else:
         print("Invalid choice")

@@ -5,7 +5,6 @@ from pytoncenter.extension.message import JettonMessage
 from pytoncenter.address import Address
 from tonpy import CellSlice
 import asyncio
-import sys
 
 
 async def wait_tick_success(client: AsyncTonCenterClientV3, msg_hash: str, user_address: str):
