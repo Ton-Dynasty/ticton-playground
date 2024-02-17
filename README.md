@@ -50,8 +50,7 @@ cp .env.example .env
 
 TONCENTER_API_KEY can apply at [@tonapibot](https://t.me/tonapibot).
 
-<details>
-<summary>📖 Tutorial: Generate a new wallet 📖</summary>
+## 📖 Tutorial: Generate a new wallet (Optional)📖 
 
 1. First, run the following command to create a new wallet:
 
@@ -61,6 +60,8 @@ TONCENTER_API_KEY can apply at [@tonapibot](https://t.me/tonapibot).
 
 2. Then, type `4` to create a new wallet.
 
+    ![image](https://github.com/Ton-Dynasty/ticton-playground/assets/48343225/a898ba67-60e2-4088-8f3c-c122bbc5b01b)
+
 3. After creation, you will get wallet mnemonic and address. Please save them in a safe place.
 
 4. Import your wallet to your wallet software, such as [TonKeeper Browser Extension](https://chromewebstore.google.com/detail/tonkeeper-%E2%80%94-wallet-for-to/omaabbefbmiijedngplfjmnooppbclkk), [TonKeeper](https://tonkeeper.com/). Click the "Import Wallet" button and paste your mnemonic.
@@ -69,7 +70,6 @@ TONCENTER_API_KEY can apply at [@tonapibot](https://t.me/tonapibot).
 
 6. Copy your address and go to [Test Giver](https://t.me/testgiver_ton_bot) to get some TON for your new wallet.
 
-</details>
 
 ## 2. Mining Testnet USDT
     
