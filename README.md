@@ -3,11 +3,9 @@ This repository is primarily for the **TICTON quote testing event tutorial**. Ev
 
 If you have any questions, feel free to join our [community](https://t.me/TictonOfficial) and discuss with us.
 
-The following steps will be conducted on TON's testnet!
+**The following steps will be conducted on TON's testnet!**
 
 ## Table of Contents
-- [TICTON Playground](#ticton-playground)
-  - [Table of Contents](#table-of-contents)
   - [1. How to Install](#1-how-to-install)
   - [2. Mining Testnet USDT](#2-mining-testnet-usdt)
   - [3. Checking the Current TON/USDT Price](#3-checking-the-current-tonusdt-price)
