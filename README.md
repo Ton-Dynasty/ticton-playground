@@ -6,10 +6,16 @@ If you have any questions, feel free to join our [community](https://t.me/Ticton
 **The following steps will be conducted on TON's testnet!**
 
 ## Table of Contents
+- [TICTON Playground](#ticton-playground)
+  - [Table of Contents](#table-of-contents)
   - [1. How to Install](#1-how-to-install)
+    - [Windows](#windows)
+    - [MacOS/Linux](#macoslinux)
   - [2. Mining Testnet USDT](#2-mining-testnet-usdt)
   - [3. Checking the Current TON/USDT Price](#3-checking-the-current-tonusdt-price)
   - [4. Tick](#4-tick)
+    - [Windows](#windows-1)
+    - [MacOS/Linux](#macoslinux-1)
   - [5.Getting Alarm Metadata](#5getting-alarm-metadata)
   - [6. Ring](#6-ring)
   - [7. Wind (Advanced)](#7-wind-advanced)
@@ -18,15 +24,52 @@ If you have any questions, feel free to join our [community](https://t.me/Ticton
     
 First, ensure your Python environment meets the version requirements: `Python version >= 3.10 and < 3.12`. The first step is to git clone this repo, then to install the ticton package, please execute the following command in your terminal:
 
-```bash
+### Windows
+
+```bash    
 git clone https://github.com/Ton-Dynasty/ticton-playground.git
 cd ticton-playground
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
 ```
-**Please ensure that you have filled out the `.env` file before proceeding with the following steps.**
+
+### MacOS/Linux
+
+```bash
+git clone https://github.com/Ton-Dynasty/ticton-playground.git
+cd ticton-playground
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+cp .env.example .env
+```
+> [!IMPORTANT]
+> Please ensure that you have filled out the `.env` file before proceeding with the following steps.
 
 TONCENTER_API_KEY can apply at [@tonapibot](https://t.me/tonapibot).
+
+<details>
+<summary>📖 Tutorial: Generate a new wallet 📖</summary>
+
+1. First, run the following command to create a new wallet:
+
+    ```bash
+    python3 main.py
+    ```
+
+2. Then, type `4` to create a new wallet.
+
+3. After creation, you will get wallet mnemonic and address. Please save them in a safe place.
+
+4. Import your wallet to your wallet software, such as [TonKeeper Browser Extension](https://chromewebstore.google.com/detail/tonkeeper-%E2%80%94-wallet-for-to/omaabbefbmiijedngplfjmnooppbclkk), [TonKeeper](https://tonkeeper.com/). Click the "Import Wallet" button and paste your mnemonic.
+   
+5. Go to settings page in your wallet software, click the TON icon 5 times to switch to testnet.
+
+6. Copy your address and go to [Test Giver](https://t.me/testgiver_ton_bot) to get some TON for your new wallet.
+
+</details>
 
 ## 2. Mining Testnet USDT
     
@@ -44,10 +87,18 @@ To find the current market price of TON/USDT, you can visit the official website
 
 ## 4. Tick
     
-If you believe the current market price of TON/USDT to be 2.2, you can execute the following command to tick:
+If you believe the current market price of `TON/USDT` to be `2.2`, you can execute the following command to tick:
+
+### Windows
 ```bash
 python main.py
 ```
+
+### MacOS/Linux
+```bash
+python3 main.py
+```
+
 The image below depicts the process of quoting a price of 1 TON for 2.2 USDT.
 <img width="562" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/55595002-c8b5-40e4-ba3d-c9df65198734">
 
