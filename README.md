@@ -27,8 +27,8 @@ The following steps will be conducted on TON's testnet!
     - If your TON balance is low, you can obtain additional TON from the [@testgiver_ton_bot](https://t.me/testgiver_ton_bot) on Telegram.
     - You can visit [tonviewer-USDT](https://testnet.tonviewer.com/EQBqSpvo4S87mX9tjHaG4zhYZeORhVhMapBJpnMZ64jhrEQK) , scan the QR code, and use "Mint:1" as a comment to receive 1000 our mock USDT tokens for your testnet operations.(Simply pay 0.1 ton as a transaction fee when submitting "Mint:1" as a comment.)
   
-        <img src="images/usdt.png" height="300">
-        <img src="images/mint.png" width="190">
+        <img width="719" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/e5745920-fa23-4b7d-be39-17986a93f4c2">
+
     
 3. **Checking the Current TON/USDT Price**
     
@@ -41,10 +41,12 @@ The following steps will be conducted on TON's testnet!
     python main.py
     ```
     The image below depicts the process of quoting a price of 1 TON for 2.2 USDT.
+   <img width="562" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/55595002-c8b5-40e4-ba3d-c9df65198734">
+
     
     Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
     
-5. **Getting Alarm Metadata**
+6. **Getting Alarm Metadata**
     
     After completing the tick operation, an alarm contract will be deployed by the oracle. This contract allows you to view the alarm's metadata. The following steps use tonviewer for demonstration:
     
@@ -59,7 +61,7 @@ The following steps will be conducted on TON's testnet!
         ![image](https://github.com/Ton-Dynasty/ticton-playground/assets/36180214/32cfc116-700c-4529-ad3c-cdd73c221807)
 
         
-6. **Ring**
+7. **Ring**
     
         
     After calling Tick, you can observe the price of TON. When you believe your quote has deviated from the current price of TON, you can call Ring to close this position to avoid being arbitraged by Timekeeper. 
@@ -72,18 +74,20 @@ The following steps will be conducted on TON's testnet!
     python main.py
     ```
     The image below depicts the process of ringing your alarm index you got in the step5.
+   
+    <img width="561" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/bdaf1d9b-8d93-49b5-9233-05a4b491c161">
     
     Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
-    
+
     
     Subsequently, you can check the jetton wallet of the TIC token to confirm whether you have received TIC tokens as a reward. 
     
     The address of your TIC wallet is the point **`F`** in the diagram below. You can go to this address, click on Methods, and enter get_wallet_data to view the TIC Balance.
+![tic](https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/cc78ed46-48b4-448a-af6a-c18804ea713c)
+![bal](https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/7449db16-a1ea-47fc-b89f-8ac5a6f34a76)
 
-    <img src="images/tic.jpg">
-    <img src="images/bal.jpg">
     
-7. **Wind (Advanced, this quote test event can be completed without Wind to receive an NFT)**
+9. **Wind (Advanced, this quote test event can be completed without Wind to receive an NFT)**
    
     If you find that the quote of an Alarm (which can be seen through the get method: `getAlarmMetadata()` and its `baseAssetPrice`) is no longer accurate, then you can arbitrage this Alarm. For detailed arbitrage mechanisms, refer to this [video](https://www.youtube.com/watch?v=_EwAkiGiw-U) or the [TICTON documentation](https://ton-dynasty.github.io/ticton-doc/).
 
@@ -95,4 +99,9 @@ The following steps will be conducted on TON's testnet!
     ```bash
     python main.py
     ```
-    The image below depicts the process of arbitraging a alarm where you believe the quoted price is incorrect. 
+    The image below depicts the process of arbitraging a alarm where you believe the quoted price is incorrect.
+
+   <img width="560" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/d523e092-503b-4b2a-808f-5444084ba5e0">
+
+   
+    Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
