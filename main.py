@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 import sys
 import os
 from helper import wait_tick_success, wait_ring_success, wait_wind_success
-from functools import cache
 
 load_dotenv()
 mnemonics = os.getenv("WALLET_MNEMONICS")
@@ -16,7 +15,6 @@ toncenter_api_key = os.getenv("TONCENTER_API_KEY")
 LOGGER = logging.getLogger(__name__)
 
 
-@cache
 async def init_client() -> TicTonAsyncClient:
     return await TicTonAsyncClient.init(
         mnemonics=mnemonics,
@@ -43,17 +41,23 @@ async def ring(client: TicTonAsyncClient, alarm_id: int):
     await wait_ring_success(client.toncenter, msg_hash=sent_msg.message_hash)
 
 
-async def wind(client: TicTonAsyncClient, alarm_id: int, buy_num: int, price: float):
+async def wind(client: TicTonAsyncClient, alarm_id: int, alarm_addr: str, buy_num: int, price: float):
     sent_msg = await client.wind(alarm_id, buy_num, price)
     print(sent_msg)
-    await wait_wind_success(client.toncenter, msg_hash=sent_msg.message_hash)
+    await wait_wind_success(
+        client.toncenter,
+        msg_hash=sent_msg.message_hash,
+        alarm_address=alarm_addr,
+        alarm_id=alarm_id,
+        user_address=client.wallet.address.to_string(True, True, True),
+    )
 
 
 async def main():
-    client_task = asyncio.create_task(init_client())
     show_prompt = False
 
     while True:
+        client_task = asyncio.create_task(init_client())
         if show_prompt:
             while True:
                 choice = input("Would you like to continue? ([Y, any key]/n): ")
@@ -71,7 +75,7 @@ async def main():
         if raw_choice not in {"0", "1", "2", "3"}:
             print("Invalid choice, please try again.")
             continue
-        
+
         choice = int(raw_choice)
         if choice == 0:
             wallet_mnemonic = mnemonic_new()
@@ -128,7 +132,7 @@ async def main():
                 print("Buy num out of range")
                 continue
             price = float(input(f"Enter the price (alarm price: {old_price}): "))
-            await wind(client, alarm_id, buy_num, price)
+            await wind(client, alarm_id, alarm_addr, buy_num, price)
             continue
 
 
