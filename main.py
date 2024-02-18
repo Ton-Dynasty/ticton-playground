@@ -79,6 +79,7 @@ async def main():
             _, _, _, wallet = Wallets.from_mnemonics(wallet_mnemonic, version)
             print("\033[95m===============Wallet Information===============\033[0m")
             print("Wallet Mnemonics: \n", "\033[93m" + " ".join(wallet_mnemonic) + "\033[0m")
+            print("Wallet Version: \n", "\033[93m" + version + "\033[0m")
             print(
                 "Wallet Address: \n",
                 "\033[93m" + wallet.address.to_string(True, True, True) + "\033[0m",
