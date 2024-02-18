@@ -102,7 +102,7 @@ The image below depicts the process of quoting a price of 1 TON for 2.2 USDT.
 
 
 
-You can open the tx link to view this transaction. Additionally, please remember your alarm ID, as it will be used in the next steps on Ring.
+(You can open the tx link to view this transaction. Additionally, please remember your alarm ID, as it will be used in the next steps on Ring.)
 
         
 ## 5. Ring
@@ -119,9 +119,10 @@ python main.py
 ```
 The image below depicts the process of ringing your alarm index you got in the step5.
 
-<img width="561" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/bdaf1d9b-8d93-49b5-9233-05a4b491c161">
+<img width="750" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/cab16cdf-d72d-495a-9e94-12e9de521d1d">
 
-Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
+
+(You can open the tx link to view this transaction.)
 
 
 Subsequently, you can check the jetton wallet of the TIC token to confirm whether you have received TIC tokens as a reward. 
@@ -146,7 +147,6 @@ python main.py
 ```
 The image below depicts the process of arbitraging a alarm where you believe the quoted price is incorrect.
 
-<img width="560" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/d523e092-503b-4b2a-808f-5444084ba5e0">
+<img width="751" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/eb1556e7-84f9-4d9c-a506-4c6cf954b8dd">
 
-
-Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
+(You can open the tx link to view this transaction.)
