@@ -37,11 +37,36 @@ async def wind(client: TicTonAsyncClient, alarm_id: int, buy_num: int, price: fl
 
 async def main():
     print("Please choose the function you want to execute: ")
+    print("0. generate new wallet")
     print("1. tick")
     print("2. ring")
     print("3. wind")
-    print("4. generate new wallet")
-    choice = int(input("Enter your choice (1/2/3/4): "))
+    choice = int(input("Enter your choice (0/1/2/3): "))
+
+    if choice == 0:
+        wallet_mnemonic = mnemonic_new()
+        version = WalletVersionEnum.v4r2
+        _, _, _, wallet = Wallets.from_mnemonics(wallet_mnemonic, version)
+        print("\033[95m===============Wallet Information===============\033[0m")
+        print(
+            "Wallet Mnemonics: \n", "\033[93m" + " ".join(wallet_mnemonic) + "\033[0m"
+        )
+        print(
+            "Wallet Address: \n",
+            "\033[93m" + wallet.address.to_string(True, True, True) + "\033[0m",
+        )
+        print("\033[95m===============Instructions===============\033[92m")
+        print("⭐️ Please keep the wallet mnemonics in a safe place ⭐️")
+        print(
+            "1. Import the mnemonics to your wallet software. (e.g. Browser Extension, TonKeeper, TonSpace, etc.)"
+        )
+        print(
+            "2. Copy your address and go to https://t.me/testgiver_ton_bot to get some testnet TON."
+        )
+        print("3. Use the wallet address to receive TON from TestGiver.")
+        print("4. Remember to edit `.env` with your new mnemonic\033[0m")
+        print("🥳🥳🥳 Done 🥳🥳🥳")
+        return
 
     client = await TicTonAsyncClient.init(
         mnemonics=mnemonics,
@@ -69,7 +94,9 @@ async def main():
             return
         alarm_metadata = await client.get_alarm_metadata(alarm_addr)
         remain_scale = alarm_metadata.remain_scale
-        decimal_ratio = 10 ** (client.metadata.base_asset_decimals - client.metadata.quote_asset_decimals)
+        decimal_ratio = 10 ** (
+            client.metadata.base_asset_decimals - client.metadata.quote_asset_decimals
+        )
         old_price = alarm_metadata.base_asset_price * decimal_ratio / 2**64
         sys.stdout.write("\033[F")
         if remain_scale == 0:
@@ -79,20 +106,6 @@ async def main():
         buy_num = int(input(f"Enter the buy num ({rng}): "))
         price = float(input(f"Enter the price (alarm price: {old_price}): "))
         await wind(client, alarm_id, buy_num, price)
-    elif choice == 4:
-        wallet_mnemonic = mnemonic_new()
-        version = WalletVersionEnum.v4r2
-        _, _, _, wallet = Wallets.from_mnemonics(wallet_mnemonic, version)
-        print("\033[95m===============Wallet Information===============\033[0m")
-        print("Wallet Mnemonics: \n", "\033[93m" + " ".join(wallet_mnemonic) + "\033[0m")
-        print("Wallet Address: \n", "\033[93m" + wallet.address.to_string(True, True, True) + "\033[0m")
-        print("\033[95m===============Instructions===============\033[92m")
-        print("⭐️ Please keep the wallet mnemonics in a safe place ⭐️")
-        print("1. Import the mnemonics to your wallet software. (e.g. Browser Extension, TonKeeper, TonSpace, etc.)")
-        print("2. Copy your address and go to https://t.me/testgiver_ton_bot to get some testnet TON.")
-        print("3. Use the wallet address to receive TON from TestGiver.")
-        print("4. Remember to edit `.env` with your new mnemonic\033[0m")
-        print("🥳🥳🥳 Done 🥳🥳🥳")
     else:
         print("Invalid choice")
 
