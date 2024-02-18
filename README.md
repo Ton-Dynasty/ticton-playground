@@ -6,8 +6,6 @@ If you have any questions, feel free to join our [community](https://t.me/Ticton
 **The following steps will be conducted on TON's testnet!**
 
 ## Table of Contents
-- [TICTON Playground](#ticton-playground)
-  - [Table of Contents](#table-of-contents)
   - [1. How to Install](#1-how-to-install)
     - [Windows](#windows)
     - [MacOS/Linux](#macoslinux)
@@ -16,9 +14,8 @@ If you have any questions, feel free to join our [community](https://t.me/Ticton
   - [4. Tick](#4-tick)
     - [Windows](#windows-1)
     - [MacOS/Linux](#macoslinux-1)
-  - [5.Getting Alarm Metadata](#5getting-alarm-metadata)
-  - [6. Ring](#6-ring)
-  - [7. Wind (Advanced)](#7-wind-advanced)
+  - [5. Ring](#5-ring)
+  - [6. Wind (Advanced)](#6-wind-advanced)
    
 ## 1. How to Install
     
@@ -100,27 +97,14 @@ python3 main.py
 ```
 
 The image below depicts the process of quoting a price of 1 TON for 2.2 USDT.
-<img width="562" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/55595002-c8b5-40e4-ba3d-c9df65198734">
+![alarm](https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/f6b9ccfb-59fd-41a2-97a0-b2496750e417)
 
 
-Receiving a message_hash indicates a successful operation. Wait a few seconds, then you can search this message_hash on [tonviewer](https://testnet.tonviewer.com/) to check the transaction.
-    
-## 5.Getting Alarm Metadata
-    
-After completing the tick operation, an alarm contract will be deployed by the oracle. This contract allows you to view the alarm's metadata. The following steps use tonviewer for demonstration:
 
-1. View the transaction you just ticked.
-2. In the illustration below, **`E`** represents your alarm contract.
-    
-    ![image](https://github.com/Ton-Dynasty/ticton-playground/assets/36180214/b9b3583c-2f6b-4b54-9120-5ba58a9e684d)
-
-    
-3. By calling **`getAlarmMetadata`** on the alarm contract, you can retrieve the alarm index.
-    
-    ![image](https://github.com/Ton-Dynasty/ticton-playground/assets/36180214/32cfc116-700c-4529-ad3c-cdd73c221807)
+You can open the tx link to view this transaction. Additionally, please remember your alarm ID, as it will be used in the next steps on Ring.
 
         
-## 6. Ring
+## 5. Ring
   
         
 After calling Tick, you can observe the price of TON. When you believe your quote has deviated from the current price of TON, you can call Ring to close this position to avoid being arbitraged by Timekeeper. 
@@ -146,7 +130,7 @@ The address of your TIC wallet is the point **`F`** in the diagram below. You ca
 ![bal](https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/7449db16-a1ea-47fc-b89f-8ac5a6f34a76)
 
     
-## 7. Wind (Advanced)
+## 6. Wind (Advanced)
 **This quote test event can be completed without Wind to receive an NFT.**
 
 If you find that the quote of an Alarm (which can be seen through the get method: `getAlarmMetadata()` and its `baseAssetPrice`) is no longer accurate, then you can arbitrage this Alarm. For detailed arbitrage mechanisms, refer to this [video](https://www.youtube.com/watch?v=_EwAkiGiw-U) or the [TICTON documentation](https://ton-dynasty.github.io/ticton-doc/).
