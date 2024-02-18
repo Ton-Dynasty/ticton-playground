@@ -55,9 +55,10 @@ TONCENTER_API_KEY can apply at [@tonapibot](https://t.me/tonapibot).
     python3 main.py
     ```
 
-2. Then, type `4` to create a new wallet.
+2. Then, type `0` to create a new wallet.
+  
+    ![mmm](https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/1b4a0e8e-33e5-434a-bcf3-8f00ed03751c)
 
-    ![image](https://github.com/Ton-Dynasty/ticton-playground/assets/48343225/a898ba67-60e2-4088-8f3c-c122bbc5b01b)
 
 3. After creation, you will get wallet mnemonic and address. Please save them in a safe place.
 
