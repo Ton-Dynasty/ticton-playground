@@ -147,6 +147,10 @@ python main.py
 ```
 The image below depicts the process of arbitraging a alarm where you believe the quoted price is incorrect.
 
+
+
 <img width="751" alt="image" src="https://github.com/Ton-Dynasty/ticton-playground/assets/87699256/eb1556e7-84f9-4d9c-a506-4c6cf954b8dd">
+
+Alarm 68 quoted 4U for one ton, but I believe this price overvalues the ton. Therefore, I initiated a Wind with Alarm 68, selling one ton to quoter for 4U and providing a new quote of 1 ton = 2.3U.
 
 (You can open the tx link to view this transaction.)
