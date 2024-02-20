@@ -1,6 +1,6 @@
 from pytoncenter import AsyncTonCenterClientV3
 from pytoncenter.v3.models import *
-from pytoncenter.utils import format_trace, create_address_mapping
+from pytoncenter.utils import format_trace, create_address_mapping, decode_base64
 from pytoncenter.extension.message import JettonMessage
 from pytoncenter.address import Address
 from ticton.parser import TicTonMessage
@@ -20,6 +20,11 @@ async def spinner(msg: str = "Loading..."):
     for frame in itertools.cycle(["-", "\\", "|", "/"]):
         print(f"{msg} {frame}", end="\r", flush=True)
         await asyncio.sleep(0.2)
+
+
+def get_tx_link(hash: str) -> str:
+    txhash = decode_base64(hash)
+    return f"https://testnet.tonviewer.com/transaction/{txhash}"
 
 
 async def wait_tick_success(client: AsyncTonCenterClientV3, msg_hash: str, user_address: str):
@@ -50,7 +55,7 @@ async def wait_tick_success(client: AsyncTonCenterClientV3, msg_hash: str, user_
                 address_mapping = create_address_mapping(map)
                 print()
                 print("Transaction Found \033[93m(0x09c0fafb)\033[0m:")
-                print(f"\033[93mhttps://testnet.tonviewer.com/transaction/{target_tx.hash}\033[0m")
+                print(f"\033[93m{get_tx_link(target_tx.hash)}\033[0m")
                 print()
                 print("🔥Your new alarm is now active!🔥")
                 print("Your alarm ID is:", "\033[1m" + str(alarm_id) + "\033[0m")
@@ -68,7 +73,7 @@ async def wait_ring_success(client: AsyncTonCenterClientV3, msg_hash: str):
         tx = await anext(client.wait_message_exists(WaitMessageExistsRequest(msg_hash=msg_hash)))
         print()
         print("Transaction Found \033[93m(0xc3510a29)\033[0m:")
-        print(f"\033[93mhttps://testnet.tonviewer.com/transaction/{tx.hash}\033[0m")
+        print(f"\033[93m{get_tx_link(tx.hash)}\033[0m")
         print()
         return
     finally:
@@ -103,7 +108,7 @@ async def wait_wind_success(client: AsyncTonCenterClientV3, msg_hash: str, alarm
                 address_mapping = create_address_mapping(map)
                 print()
                 print("Transaction Found \033[93m(0x09c0fafb)\033[0m:")
-                print(f"\033[93mhttps://testnet.tonviewer.com/transaction/{ branch.transaction.hash}\033[0m")
+                print(f"\033[93m{get_tx_link(branch.transaction.hash)}\033[0m")
                 print()
                 print("🔥Your new alarm is now active!🔥")
                 print("Your alarm ID is:", "\033[1m" + str(alarm_id) + "\033[0m")
