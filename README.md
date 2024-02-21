@@ -1,5 +1,5 @@
 # TICTON Playground
-This repository is primarily for the **TICTON quote testing event tutorial**. Everyone can refer to this document to complete the quote and claim rewards. Those who successfully follow the tutorial can obtain a TICTON-exclusive NFT. In the future, holders of these NFTs will have priority in participating in airdrops and other events.
+This repository is primarily for the **TICTON quote testing event tutorial**. Everyone can refer to this document or this [tutorial video](https://www.youtube.com/watch?v=5USR937Vt5k) to complete the quote and claim rewards. Those who successfully follow the tutorial can obtain a TICTON-exclusive NFT. In the future, holders of these NFTs will have priority in participating in airdrops and other events.
 
 If you have any questions, feel free to join our [community](https://t.me/TictonOfficial) and discuss with us.
 
