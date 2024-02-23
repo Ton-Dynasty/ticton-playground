@@ -33,7 +33,7 @@ python-dotenv==1.0.1
 pytoncenter==0.0.13
 PyYAML==6.0.1
 six==1.16.0
-ticton==0.1.16
+ticton @ git+https://github.com/Ton-Dynasty/ticton-python-sdk.git@4c18ebf45659351a1df2bf8adbe4d80225bf0ccd
 tonpy==0.0.0.1.2b0
 tonsdk==1.0.13
 treelib==1.7.0

@@ -10,7 +10,7 @@ import itertools
 
 
 DEFAULT_MAP = {
-    Address("kQBXgF5mlp3AY7eg1jc6gsWbpCdkzs8EvfkLR3mzIZ2xT1Ys"): "Oracle (TON/USDT)",
+    Address("kQBbO_Y0RvYx6-nHIJRAYmvvdBZ1CuB5Cx4qn25Z5ufME9kY"): "Oracle (TON/USDT)",
     Address("kQBdt8NeOWfqcFwKhckX--6JuuTr4O8MhEicaKHeJ5Qyfpzt"): "Oracle Jetton Wallet (USDT)",
 }
 

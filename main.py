@@ -19,7 +19,7 @@ async def init_client() -> TicTonAsyncClient:
     return await TicTonAsyncClient.init(
         mnemonics=mnemonics,
         toncenter_api_key=toncenter_api_key,
-        oracle_addr="kQBXgF5mlp3AY7eg1jc6gsWbpCdkzs8EvfkLR3mzIZ2xT1Ys",
+        oracle_addr="kQBbO_Y0RvYx6-nHIJRAYmvvdBZ1CuB5Cx4qn25Z5ufME9kY",
         testnet=True,
         logger=LOGGER,
     )
