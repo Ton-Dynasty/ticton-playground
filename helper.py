@@ -10,8 +10,10 @@ import itertools
 
 
 DEFAULT_MAP = {
-    Address("kQBbO_Y0RvYx6-nHIJRAYmvvdBZ1CuB5Cx4qn25Z5ufME9kY"): "Oracle (TON/USDT)",
-    Address("kQBdt8NeOWfqcFwKhckX--6JuuTr4O8MhEicaKHeJ5Qyfpzt"): "Oracle Jetton Wallet (USDT)",
+    Address("kQCQPYxpFyFXxISiA_c42wNYrzcGc29NcFHqrupDTlT3a9It"): "Oracle (TON/USDT)",
+    Address(
+        "0QAQGrLF15SDE3flxiFf7NskWum-VZYPKD_f9SGnK4X2SaI9"
+    ): "Oracle Jetton Wallet (USDT)",
 }
 
 
@@ -27,31 +29,42 @@ def get_tx_link(hash: str) -> str:
     return f"https://testnet.tonviewer.com/transaction/{txhash}"
 
 
-async def wait_tick_success(client: AsyncTonCenterClientV3, msg_hash: str, user_address: str):
+async def wait_tick_success(
+    client: AsyncTonCenterClientV3, msg_hash: str, user_address: str
+):
     map = {**DEFAULT_MAP, Address(user_address): "Your Wallet"}
     spinner1 = asyncio.create_task(spinner("Wait for the transaction to be confirmed"))
 
     try:
-        tx = await anext(client.wait_message_exists(WaitMessageExistsRequest(msg_hash=msg_hash)))
+        tx = await anext(
+            client.wait_message_exists(WaitMessageExistsRequest(msg_hash=msg_hash))
+        )
     finally:
         spinner1.cancel()
         print()
 
     spinner2 = asyncio.create_task(spinner("Analyzing transaction"))
     try:
-        trace = await client.get_trace_alternative(GetTransactionTraceRequest(hash=tx.hash))
+        trace = await client.get_trace_alternative(
+            GetTransactionTraceRequest(hash=tx.hash)
+        )
         user_jetton_wallet = Address(trace.children[0].transaction.in_msg.destination)
         map.update({user_jetton_wallet: "Your Jetton Wallet (USDT)"})
         # Search transaction by opcode 0x09c0fafb
         branches = trace.children[0].children[0]
         for branch in branches.children:
-            if branch.transaction.in_msg.opcode == JettonMessage.TransferNotification.OPCODE:
+            if (
+                branch.transaction.in_msg.opcode
+                == JettonMessage.TransferNotification.OPCODE
+            ):
                 target_tx = branch.children[0].transaction
                 body = target_tx.in_msg.message_content.body
                 cs = CellSlice(body)
                 _ = cs.load_uint(32)
                 alarm_id = cs.load_uint(256)
-                map.update({Address(target_tx.in_msg.destination): f"Alarm (ID: {alarm_id})"})
+                map.update(
+                    {Address(target_tx.in_msg.destination): f"Alarm (ID: {alarm_id})"}
+                )
                 address_mapping = create_address_mapping(map)
                 print()
                 print("Transaction Found \033[93m(0x09c0fafb)\033[0m:")
@@ -68,9 +81,13 @@ async def wait_tick_success(client: AsyncTonCenterClientV3, msg_hash: str, user_
 
 
 async def wait_ring_success(client: AsyncTonCenterClientV3, msg_hash: str):
-    spinner_task = asyncio.create_task(spinner("Wait for the transaction to be confirmed"))
+    spinner_task = asyncio.create_task(
+        spinner("Wait for the transaction to be confirmed")
+    )
     try:
-        tx = await anext(client.wait_message_exists(WaitMessageExistsRequest(msg_hash=msg_hash)))
+        tx = await anext(
+            client.wait_message_exists(WaitMessageExistsRequest(msg_hash=msg_hash))
+        )
         print()
         print("Transaction Found \033[93m(0xc3510a29)\033[0m:")
         print(f"\033[93m{get_tx_link(tx.hash)}\033[0m")
@@ -80,11 +97,27 @@ async def wait_ring_success(client: AsyncTonCenterClientV3, msg_hash: str):
         spinner_task.cancel()
 
 
-async def wait_wind_success(client: AsyncTonCenterClientV3, msg_hash: str, alarm_id: int, alarm_address: str, user_address: str):
-    map = {**DEFAULT_MAP, **{Address(user_address): "Your Wallet", Address(alarm_address): f"Old Alarm (ID: {alarm_id})"}}
-    spinner_task = asyncio.create_task(spinner("Wait for the transaction to be confirmed"))
+async def wait_wind_success(
+    client: AsyncTonCenterClientV3,
+    msg_hash: str,
+    alarm_id: int,
+    alarm_address: str,
+    user_address: str,
+):
+    map = {
+        **DEFAULT_MAP,
+        **{
+            Address(user_address): "Your Wallet",
+            Address(alarm_address): f"Old Alarm (ID: {alarm_id})",
+        },
+    }
+    spinner_task = asyncio.create_task(
+        spinner("Wait for the transaction to be confirmed")
+    )
     try:
-        tx = await anext(client.wait_message_exists(WaitMessageExistsRequest(msg_hash=msg_hash)))
+        tx = await anext(
+            client.wait_message_exists(WaitMessageExistsRequest(msg_hash=msg_hash))
+        )
     except Exception as e:
         print(e)
         return
@@ -94,17 +127,27 @@ async def wait_wind_success(client: AsyncTonCenterClientV3, msg_hash: str, alarm
 
     analyzer_task = asyncio.create_task(spinner("Analyzing transaction"))
     try:
-        trace = await client.get_trace_alternative(GetTransactionTraceRequest(hash=tx.hash))
+        trace = await client.get_trace_alternative(
+            GetTransactionTraceRequest(hash=tx.hash)
+        )
         user_jetton_wallet = Address(trace.children[0].transaction.in_msg.destination)
         map.update({user_jetton_wallet: "Your Jetton Wallet (USDT)"})
-        branches = trace.children[0].children[0].children[0].children[0].children[0].children
+        branches = (
+            trace.children[0].children[0].children[0].children[0].children[0].children
+        )
         for branch in branches:
             if branch.transaction.in_msg.opcode == TicTonMessage.Tock.OPCODE:
                 body = branch.transaction.in_msg.message_content.body
                 cs = CellSlice(body)
                 _ = cs.load_uint(32)
                 alarm_id = cs.load_uint(256)
-                map.update({Address(branch.transaction.in_msg.destination): f"New Alarm (ID: {alarm_id})"})
+                map.update(
+                    {
+                        Address(
+                            branch.transaction.in_msg.destination
+                        ): f"New Alarm (ID: {alarm_id})"
+                    }
+                )
                 address_mapping = create_address_mapping(map)
                 print()
                 print("Transaction Found \033[93m(0x09c0fafb)\033[0m:")

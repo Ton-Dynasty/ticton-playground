@@ -19,7 +19,7 @@ async def init_client() -> TicTonAsyncClient:
     return await TicTonAsyncClient.init(
         mnemonics=mnemonics,
         toncenter_api_key=toncenter_api_key,
-        oracle_addr="kQBbO_Y0RvYx6-nHIJRAYmvvdBZ1CuB5Cx4qn25Z5ufME9kY",
+        oracle_addr="kQCQPYxpFyFXxISiA_c42wNYrzcGc29NcFHqrupDTlT3a9It",
         testnet=True,
         logger=LOGGER,
     )
@@ -41,7 +41,13 @@ async def ring(client: TicTonAsyncClient, alarm_id: int):
     await wait_ring_success(client.toncenter, msg_hash=sent_msg.message_hash)
 
 
-async def wind(client: TicTonAsyncClient, alarm_id: int, alarm_addr: str, buy_num: int, price: float):
+async def wind(
+    client: TicTonAsyncClient,
+    alarm_id: int,
+    alarm_addr: str,
+    buy_num: int,
+    price: float,
+):
     sent_msg = await client.wind(alarm_id, buy_num, price)
     print(sent_msg)
     await wait_wind_success(
@@ -82,7 +88,10 @@ async def main():
             version = WalletVersionEnum.v4r2
             _, _, _, wallet = Wallets.from_mnemonics(wallet_mnemonic, version)
             print("\033[95m===============Wallet Information===============\033[0m")
-            print("Wallet Mnemonics: \n", "\033[93m" + " ".join(wallet_mnemonic) + "\033[0m")
+            print(
+                "Wallet Mnemonics: \n",
+                "\033[93m" + " ".join(wallet_mnemonic) + "\033[0m",
+            )
             print("Wallet Version: \n", "\033[93m" + version + "\033[0m")
             print(
                 "Wallet Address: \n",
@@ -90,8 +99,12 @@ async def main():
             )
             print("\033[95m===============Instructions===============\033[92m")
             print("⭐️ Please keep the wallet mnemonics in a safe place ⭐️")
-            print("1. Import the mnemonics to your wallet software. (e.g. Browser Extension, TonKeeper, TonSpace, etc.)")
-            print("2. Copy your address and go to https://t.me/testgiver_ton_bot to get some testnet TON.")
+            print(
+                "1. Import the mnemonics to your wallet software. (e.g. Browser Extension, TonKeeper, TonSpace, etc.)"
+            )
+            print(
+                "2. Copy your address and go to https://t.me/testgiver_ton_bot to get some testnet TON."
+            )
             print("3. Use the wallet address to receive TON from TestGiver.")
             print("4. Remember to edit `.env` with your new mnemonic\033[0m")
             print("🥳🥳🥳 Done 🥳🥳🥳")
@@ -120,7 +133,10 @@ async def main():
                 continue
             alarm_metadata = await client.get_alarm_metadata(alarm_addr)
             remain_scale = alarm_metadata.remain_scale
-            decimal_ratio = 10 ** (client.metadata.base_asset_decimals - client.metadata.quote_asset_decimals)
+            decimal_ratio = 10 ** (
+                client.metadata.base_asset_decimals
+                - client.metadata.quote_asset_decimals
+            )
             old_price = alarm_metadata.base_asset_price * decimal_ratio / 2**64
             sys.stdout.write("\033[F")
             if remain_scale == 0:
